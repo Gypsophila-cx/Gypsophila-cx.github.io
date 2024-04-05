@@ -69,4 +69,17 @@
         <tag>编程</tag>
       </tags>
   </entry>
+  <entry>
+    <title>本科毕业设计课题</title>
+    <url>/2024/04/05/Pade/</url>
+    <content><![CDATA[<h1 id="Pade逼近及其在解带有极点的初值问题中的应用"><a href="#Pade逼近及其在解带有极点的初值问题中的应用" class="headerlink" title="Pade逼近及其在解带有极点的初值问题中的应用"></a>Pade逼近及其在解带有极点的初值问题中的应用</h1><p>相比起多项式逼近，有理逼近在被逼近函数的光滑性不够好的时候往往更加合适，并且基于时间推进式算法和多项式逼近的数值方法在极点附近都会失效，这要求我们尝试使用一种新的逼近方法来近似带有极点的函数，本文内容主要包括有理函数逼近，特别是其中的Pade逼近（及各种变体），和使用这种逼近来近似带有极点的函数，进而数值求解带有极点的常微分方程，如Riccati方程。</p>
+]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+      <tags>
+        <tag>逼近论</tag>
+        <tag>Pade逼近</tag>
+      </tags>
+  </entry>
 </search>
