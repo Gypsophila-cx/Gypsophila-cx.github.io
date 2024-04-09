@@ -26,7 +26,7 @@
 <meta property="og:description" content="记录这里用来记录自己在LeeCode上学习编程技能的经历，希望自己可以坚持每天至少做一道题吧！ Day 1：两数之和 问题描述：  给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。你可以按任意顺序返回答案。  12345">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-04T15:34:31.719Z">
-<meta property="article:modified_time" content="2024-04-08T15:32:18.233Z">
+<meta property="article:modified_time" content="2024-04-09T15:27:05.802Z">
 <meta property="article:author" content="Gypsophila">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
@@ -542,8 +542,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-04-08 23:32:18</span>
-            <span class="mobile">2024-04-08 23:32:18</span>
+            <span class="desktop">2024-04-09 23:27:05</span>
+            <span class="mobile">2024-04-09 23:27:05</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -626,6 +626,24 @@
 </blockquote>
 <div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMedianSortedArrays</span>(<span class="params">self, nums1, nums2</span>):</span><br><span class="line">        nums1.extend(nums2)</span><br><span class="line">        <span class="built_in">list</span> = <span class="built_in">sorted</span>(nums1)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(<span class="built_in">list</span>)%<span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            res = (<span class="built_in">list</span>[<span class="built_in">int</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)/<span class="number">2</span>-<span class="number">1</span>)]+<span class="built_in">list</span>[<span class="built_in">int</span>(<span class="built_in">len</span>(<span class="built_in">list</span>)/<span class="number">2</span>)])/<span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = <span class="built_in">list</span>[<span class="built_in">int</span>((<span class="built_in">len</span>(<span class="built_in">list</span>)-<span class="number">1</span>)/<span class="number">2</span>)]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">float</span>(res)</span><br></pre></td></tr></table></figure></div>
 <p>直接用了标准的排序函数<code>sort</code>，先合并再排序，最后找到中位数。</p>
+<h2 id="Day-5-最长回文字串"><a href="#Day-5-最长回文字串" class="headerlink" title="Day 5: 最长回文字串"></a>Day 5: <a class="link"   target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindromic-substring/description/" >最长回文字串 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></h2><p>题目描述：</p>
+<blockquote>
+<p>如果字符串的反序与原始字符串相同，则该字符串称为回文字符串。<br>给一个字符串<code>s</code>，找到<code>s</code>中最长的回文子串。</p>
+</blockquote>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestPalindrome</span>(<span class="params">self, s</span>):</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> s</span><br><span class="line">        </span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        begin = <span class="number">0</span></span><br><span class="line">        <span class="comment"># dp[i][j] 表示 s[i..j] 是否是回文串</span></span><br><span class="line">        dp = [[<span class="literal">False</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            dp[i][i] = <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 递推开始</span></span><br><span class="line">        <span class="comment"># 先枚举子串长度</span></span><br><span class="line">        <span class="keyword">for</span> L <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">            <span class="comment"># 枚举左边界，左边界的上限设置可以宽松一些</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                <span class="comment"># 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得</span></span><br><span class="line">                j = L + i - <span class="number">1</span></span><br><span class="line">                <span class="comment"># 如果右边界越界，就可以退出当前循环</span></span><br><span class="line">                <span class="keyword">if</span> j &gt;= n:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                    </span><br><span class="line">                <span class="keyword">if</span> s[i] != s[j]:</span><br><span class="line">                    dp[i][j] = <span class="literal">False</span> </span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> j - i &lt; <span class="number">3</span>:</span><br><span class="line">                        dp[i][j] = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        dp[i][j] = dp[i + <span class="number">1</span>][j - <span class="number">1</span>]</span><br><span class="line">                </span><br><span class="line">                <span class="comment"># 只要 dp[i][L] == true 成立，就表示子串 s[i..L] 是回文，此时记录回文长度和起始位置</span></span><br><span class="line">                <span class="keyword">if</span> dp[i][j] <span class="keyword">and</span> j - i + <span class="number">1</span> &gt; max_len:</span><br><span class="line">                    max_len = j - i + <span class="number">1</span></span><br><span class="line">                    begin = i</span><br><span class="line">        <span class="keyword">return</span> s[begin:begin + max_len]</span><br></pre></td></tr></table></figure></div>
+<p>使用的方法是<strong>动态规划</strong>。</p>
+<p>注意到对于一个子串而言，如果它是回文串，并且长度大于2，那么将它首尾的两个字母去除之后，它仍然是个回文串。<br>根据这样的思路，可以用动态规划的方法解决本题。我们用 $ P(i,j) $ 表示字符串s的第i到j个字母组成的串（下文表示成$ s[i:j] $）是否为回文串：</p>
+<p>$$<br>    P(i,j) &#x3D;<br>    \begin{cases}<br>        true, &amp;\text{如果子串} Si…Sj \text{是回文串}\<br>        false, &amp;\text{其它情况}<br>    \end{cases}<br>$$</p>
+<p>这里的「其它情况」包含两种可能性：</p>
+<ul>
+<li>$ s[i,j] $本身不是一个回文串；</li>
+<li>$ i&gt;j $，此时$ s[i,j] $本身不合法。</li>
+</ul>
+<p>接下来可以写出动态规划的状态转移方程：</p>
+<p>$$<br>    P(i,j) &#x3D; P(i+1, j-1) \wedge (S_i &#x3D;&#x3D; S_j)<br>$$<br>​<br>也就是说，只有$ s[i+1:j−1] $是回文串，并且 s 的第 i 和 j 个字母相同时，$ s[i:j] $ 才会是回文串。</p>
+<p>上文的所有讨论是建立在子串长度大于 2 的前提之上的，我们还需要考虑动态规划中的边界条件，即子串的长度为 1 或 2。对于长度为 1 的子串，它显然是个回文串；对于长度为 2 的子串，只要它的两个字母相同，它就是一个回文串。因此我们就可以写出动态规划的边界条件：</p>
+<p>$$<br>    \begin{cases}<br>        P(i,i)&#x3D;true\<br>        P(i, i+1) &#x3D; ( S_i &#x3D;&#x3D; S_{i+1} )<br>    \end{cases}<br>$$</p>
+<p>根据这个思路，我们就可以完成动态规划了，最终的答案即为所有 $ P(i,j)&#x3D;true $ 中 $ j−i+1 $（即子串长度）的最大值。注意：在状态转移方程中，我们是从长度较短的字符串向长度较长的字符串进行转移的，因此要注意动态规划的循环顺序。</p>
 
         </div>
 
@@ -640,7 +658,7 @@
         
             <li>
                 <strong>Updated at
-                    :</strong> 2024-04-08 23:32:18
+                    :</strong> 2024-04-09 23:27:05
             </li>
         
         <li>
@@ -775,7 +793,7 @@
     <div class="post-toc">
         <div class="toc-title">On this page</div>
         <div class="page-title">LeeCode刷题记录</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95"><span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-1%EF%BC%9A%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-text">Day 1：两数之和 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0"><span class="nav-text">Day 2: 两数相加 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-text">Day 3: 无重复字符的最长子串 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-4-%E5%90%88%E5%B9%B6%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="nav-text">Day 4: 合并数组的中位数 </span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95"><span class="nav-text">记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-1%EF%BC%9A%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C"><span class="nav-text">Day 1：两数之和 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-2-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0"><span class="nav-text">Day 2: 两数相加 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-text">Day 3: 无重复字符的最长子串 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-4-%E5%90%88%E5%B9%B6%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="nav-text">Day 4: 合并数组的中位数 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%97%E4%B8%B2"><span class="nav-text">Day 5: 最长回文字串 </span></a></li></ol></li></ol>
 
     </div>
 </div>
