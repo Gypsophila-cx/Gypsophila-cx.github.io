@@ -477,7 +477,7 @@
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">14</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">15</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -573,7 +573,7 @@
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
             
 <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="3d581c5ed4da54272a6490d5582a3eae9dd6a8a1a0998bf56c8cb7a703416f25">946577085654ebb4a8e177db1b156268ab3b40159fdeeed287be1867457bf7dbfa300ea0a14dfd0a65c0bd1867ad86777ba7e118d3371cecef751539f63f2213</script>
+  <script id="hbeData" type="hbeData" data-hmacdigest="d47e727ef89fc88ce9a42af5164b22da4d1346a500a38e681f85aaaf16699c03">73c15b9672f559989eeb9c69679511bb9455a20600afe2a3e0cd6025707cb021d0f3fa0becb22dbe66f856ffe7cab94169d83ab6b9c778634f0f28f253d297c8</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
       <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
@@ -583,7 +583,13 @@
     </div>
   </div>
 </div>
-<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+<link href="/css/hbe.style.css" rel="stylesheet" type="text/css"><script data-swup-reload-script type="module" src="/js/plugins/hbe.js"></script>
+<script data-swup-reload-script type="module">
+import {initHBE} from "/js/plugins/hbe.js";
+  console.log("hexo-blog-encrypt: loaded.");
+    initHBE();
+</script>
+
         </div>
 
         
@@ -759,7 +765,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        14 posts in total
+                        15 posts in total
                     </span>
                     
                 </p>
