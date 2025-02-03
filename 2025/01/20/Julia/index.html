@@ -478,7 +478,7 @@ mjx-container[display="true"] + br {
         <div class="label text-third-text-color text-sm">Categories</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
         <div class="label text-third-text-color text-sm">Posts</div>
     </a>
 </div>
@@ -527,8 +527,8 @@ mjx-container[display="true"] + br {
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2025-01-20 16:52:47</span>
-            <span class="mobile">2025-01-20 16:52:47</span>
+            <span class="desktop">2025-01-25 23:58:43</span>
+            <span class="mobile">2025-01-25 23:58:43</span>
             <span class="hover-info">Updated</span>
         </span>
     
@@ -638,6 +638,15 @@ mjx-container[display="true"] + br {
 <div class="code-container" data-rel="Julia"><figure class="iseeu highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(v1<span class="number">.11</span>) pkg&gt; add git<span class="meta">@github</span>.com:gypsophila-cx/NewProj.git</span><br></pre></td></tr></table></figure></div>
 
 <p>一旦<code>NewProj</code>程序包被记录在了全局环境的项目文件中，在全局环境下引入它也就不会有问题了。</p>
+<h2 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>通常情况下，我们在 Julia 中定义函数的方式是这样的：</p>
+<div class="code-container" data-rel="Julia"><figure class="iseeu highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> IterativeSovler(A::<span class="built_in">AbstractMatrix</span>{T}, b::<span class="built_in">Vector</span>{T}, tol::T=<span class="number">1e-6</span>, max_iter::<span class="built_in">Int</span>=<span class="number">1000</span>) <span class="keyword">where</span> T</span><br><span class="line">    <span class="comment"># some code</span></span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></div>
+
+<p>上述代码给出了一个编写迭代求解器的示例。在 Julia 中，函数的参数类型是可以显式声明的，也可以不声明，这取决于程序的需求。类型声明能够帮助编译器做出优化，并为用户提供更清晰的接口。虽然类型声明不是强制性的，但在某些场合，显式声明参数类型能够提高性能、避免错误，并提升代码的可读性，而在编写时不指定类型会增加运行时开销，因为 Julia 需要动态决定如何处理参数类型。</p>
+<p>另外，上述代码中<code>where T</code>语句用于定义类型参数（type parameters），它表示函数、类型或结构体中使用的类型变量，这里<code>where T</code>使得函数<code>IterativeSovler</code>的类型能够适配不同的数据类型。这样做的好处有：</p>
+<ol>
+<li>泛化：<code>where T</code>使得<code>IterativeSovler</code>函数可以处理不同类型的数据。例如，如果传入一个<code>Float64</code>矩阵<code>A</code>和向量<code>b</code>，那么<code>T</code>就会被推断为<code>Float64</code>；如果传入<code>Complex{Float64}</code>类型的矩阵和向量，<code>T</code>就会被推断为<code>Complex{Float64}</code>。这使得函数变得更加灵活，能够处理各种数据类型。</li>
+<li>类型安全：使用类型参数<code>T</code>允许在编译时进行类型检查，从而避免类型错误。编译器会确保在调用函数时传入的所有参数（矩阵<code>A</code>和向量<code>b</code>）都具有一致的类型。</li>
+</ol>
 <h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><ul>
 <li>英文官方文档：<a class="link" target="_blank" rel="noopener" href="https://docs.julialang.org/en/v1/">Julia Documentation<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a></li>
 <li>中文官方文档：<a class="link" target="_blank" rel="noopener" href="https://docs.juliacn.com/latest/">Julia 中文文档<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a><ul>
@@ -659,7 +668,7 @@ mjx-container[display="true"] + br {
         
             <li>
                 <strong>Updated at
-                    :</strong> 2025-01-20 16:52:47
+                    :</strong> 2025-01-25 23:58:43
             </li>
         
         <li>
@@ -695,6 +704,18 @@ mjx-container[display="true"] + br {
 
 		
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/2025/01/26/IterativeMethod/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item">Iterative Methods for Sparse Linear Systems</span>
+						<span class="post-nav-item">Prev posts</span>
+					</span>
+				</a>
+			</div>
 			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
@@ -776,7 +797,7 @@ mjx-container[display="true"] + br {
 	<div class="post-toc">
 		<div class="toc-title">On this page</div>
 		<div class="page-title">Julia Language</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-text">项目的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E7%A8%8B%E5%BA%8F%E5%8C%85"><span class="nav-text">引入程序包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-text">相关资料</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-text">项目的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E7%A8%8B%E5%BA%8F%E5%8C%85"><span class="nav-text">引入程序包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99"><span class="nav-text">代码编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99"><span class="nav-text">相关资料</span></a></li></ol>
 
 	</div>
 </div>
@@ -805,7 +826,7 @@ mjx-container[display="true"] + br {
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        33 posts in total
+                        34 posts in total
                     </span>
                     
                 </p>
