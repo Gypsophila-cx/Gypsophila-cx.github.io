@@ -386,40 +386,11 @@
 		<h1></h1>
 		
 
-		<p>一般地，带约束凸优化问题形如<br>$$<br>    \begin{aligned}<br>        \min_{x\in \mathbb{R}^n} &amp;f(x)\\<br>        \text{s.t.} &amp;c_i(x) \leqslant 0,\quad i&#x3D;1,2,\cdots ,m\\<br>        &amp;Ax &#x3D; b<br>    \end{aligned}<br>$$<br>其中$f(x)$是适当的凸函数，$c_i(x)$是$\text{dom}c_i &#x3D; \mathbb{R}^n$的凸函数，$A\in \mathbb{R}^{p\times n},b\in \mathbb{R}^p$已知。令<br>$$<br>    D &#x3D; \text{dom} f &#x3D; \{x:f(x)&lt;+\infty\}<br>$$<br>为$f$关于$x$的自然定义域，若$\text{dom}c_i \neq \mathbb{R}^n$，则令<br>$$<br>    D &#x3D; \text{dom} f\cap \left( \bigcap_{i&#x3D;1}^m\text{dom}c_i \right).<br>$$<br>定义可行域为<br>$$<br>    \Omega &#x3D; \{x\in D:c_i(x) \leqslant 0,\quad i&#x3D;1,2,\cdots ,m;\ Ax &#x3D; b\}.<br>$$<br>并且由于凸优化问题的可行域是凸集, 因此等式约束一般只能是线性约束。</p>
-<p>凸优化问题有很多好的性质。一个自然的问题是:我们能否像研究无约束问题那样找到该问题最优解的一阶充要条件?如果这样的条件存在, 它在什么样的约束品性下成立? 在通常情况下, 优化问题的对偶间隙大于0, 即强对偶原理不满足，但对很多凸优化问题, 在特定约束品性下可以证明强对偶原理。直观的一种约束品性是存在满足所有约束条件的严格可行解。</p>
-<p>首先给出集合$D$的相对内点集$\text{relint} D$的定义。给定集合$D$, 记其仿射包为<br>$$<br>    \text{affine} D &#x3D; \left\{<br>        x: x &#x3D; \sum_{i&#x3D;1}^k \theta_i x_i, \theta_i \in \mathbb{R}, x_i \in D, \sum_{i&#x3D;1}^k \theta_i &#x3D; 1<br>        \right\}.<br>$$<br>称集合$D$的<strong>相对内点集</strong>为<br>$$<br>    \text{relint} D &#x3D; \{<br>        x\in D: \exists r&gt;0 \text{ s.t. } B(x,r) \cap \text{affine} D \subseteq D<br>    \}.<br>$$<br>相对内点是内点的推广, 若$D$本身的“维数”较低, 则$D$不可能有内点, 但如果在它的仿射包$\text{affine} D$中考虑, 则$D$可能有相对内点。</p>
-<div style="border: 2px solid #000; padding: 15px; margin: 20px 0;  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);">
-    <div style="font-weight: bold; font-size: 20px; text-align: left; margin-bottom: 10px;">Slater's Constraint Qualification Condition</div>
-    <div style="line-height: 1.5; font-size: 16px;">
-        若对凸优化问题
-        $$
-            \begin{aligned}
-                \min_{x\in \mathbb{R}^n} &f(x)\\\\
-                \text{s.t.} &c_i(x) \leqslant 0,\quad i=1,2,\cdots ,m\\\\
-                &Ax = b
-            \end{aligned}  
-        $$
-        存在$x^*\in \text{relint} D$使得
-        $$
-            c_i(x^*) < 0,\quad i=1,2,\cdots ,m\quad \text{and} \quad Ax^* = b
-        $$
-        则称对此问题Slater约束品性满足。该约束品性也称为 Slater条件。
-    </div>
+		<div>
+<center>
+<iframe src="https://slides.com/xichen-8/test-slide/embed?style=light#/0/2" width="576" height="420" title="Test Slide" scrolling="no" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</center>
 </div>
-
-<p>Slater约束品性实际上是要求自然定义域$D$的相对内点中存在使得不等式约束严格成立的点，$\text{affine}D &#x3D; \mathbb{R}^n$时相对内点就是内点。</p>
-<p>不等式约束是仿射函数时, Slater条件可以放宽。设前$k$个不等式约束是仿射的, 此时Slater约束品性变为:存在$x\in \text{relint} D$, 满足<br>$$<br>    \quad \text{and} \quad Ax &#x3D; b<br>    \begin{aligned}<br>        c_i(x) &amp;\leqslant  0,\quad i&#x3D;1,2,\cdots ,k\\<br>        c_i(x) &amp; &lt;0,\quad i&#x3D;k+1,k+2,\cdots ,m\\<br>        Ax &#x3D; b,<br>    \end{aligned}<br>$$<br>即对线性不等式约束无需要求其存在严格可行点。</p>
-<p>Slater约束品性下的最优性条件有如下重要结论：</p>
-<div style="border: 2px solid #000; padding: 15px; margin: 20px 0;  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);">
-    <div style="font-weight: bold; font-size: 20px; text-align: left; margin-bottom: 10px;">Strong Dual Principle</div>
-    <div style="line-height: 1.5; font-size: 16px;">
-        若凸优化问题满足Slater约束品性，则强对偶原理成立。
-    </div>
-</div>
-
-<p>该定理表明，Slater条件成立时，当$q^*&gt;-\infty$时, 对偶问题的最优解可以取到, 即存在对偶可行解$(\lambda^*, \nu^*)$使得<br>$$<br>    g(\lambda^*, \nu^*) &#x3D; q^* &#x3D; p^*.<br>$$</p>
-
 	</div>
 
 	<div class="page-template-comments">
