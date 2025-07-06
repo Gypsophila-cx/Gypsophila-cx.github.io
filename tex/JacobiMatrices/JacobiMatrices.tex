@@ -1,0 +1,131 @@
+\documentclass[a4paper, 10pt]{article}
+\input{../macros}
+
+\begin{document}
+\hfill\vbox{\hbox{Numerical Analysis}\hbox{Chen Xi}\hbox{Summer, 2025}}
+
+\begin{center}\Large
+    \textbf{Jacobi Matrices}
+\end{center}
+
+\section{Jacobi Matrix}
+A \emph{Jacobi matrix} is a symmetric tridiagonal matrix of the form:
+\begin{equation}\label{eq:jacobi-star}
+T_n =
+\begin{bmatrix}
+\gamma_1 & \delta_2 &        &        &       \\
+\delta_2 & \gamma_2 & \delta_3 &        &       \\
+         & \ddots  & \ddots   & \ddots &       \\
+         &         & \delta_{n-1} & \gamma_{n-1} & \delta_n \\
+         &         &        & \delta_n & \gamma_n
+\end{bmatrix}.
+\tag{$*$}
+\end{equation}
+
+More generally, a \emph{Jacobi operator} is a symmetric linear operator on sequences, represented by an infinite tridiagonal matrix. It specifies systems of orthonormal polynomials with respect to a finite, positive Borel measure. The name originates from Jacobi's 1848 theorem stating that every symmetric matrix over a principal ideal domain is congruent to a tridiagonal matrix.
+
+\section{Algebraic Properties}
+
+Let $\{\varphi_n\}_{n=0}^\infty$ be orthonormal polynomials satisfying the three-term recurrence
+\begin{equation}\label{eq:three-term-varphi}
+\delta_{n+1}\varphi_{n}(\lambda) = (\lambda - \gamma_n)\varphi_{n-1}(\lambda) - \delta_n\varphi_{n-2}(\lambda).
+\end{equation}
+Then the finite Jacobi matrix $T_n$ is as in \eqref{eq:jacobi-star}.
+
+A simple calculation shows that the characteristic polynomial satisfies:
+\begin{equation}\label{eq:char-recursion}
+\det(\lambda I - T_n) = (\lambda - \gamma_n)\det(\lambda I - T_{n-1}) - \delta_n^2\det(\lambda I - T_{n-2}).
+\end{equation}
+Defining $\psi_n(\lambda):=\det(\lambda I - T_n)$, \eqref{eq:char-recursion} becomes
+\begin{equation}\label{eq:psi-recursion}
+\psi_n(\lambda) = (\lambda - \gamma_n)\psi_{n-1}(\lambda) - \delta_n^2\psi_{n-2}(\lambda).
+\end{equation}
+This recurrence corresponds to another tridiagonal matrix
+\begin{equation}
+\hat{T}_n =
+\begin{bmatrix}
+\gamma_1 & 1        &        &        &       \\
+\delta_2^2 & \gamma_2 & 1      &        &       \\
+           & \ddots  & \ddots & \ddots &       \\
+           &         & \delta_{n-1}^2 & \gamma_{n-1} & 1 \\
+           &         &        & \delta_n^2 & \gamma_n
+\end{bmatrix}.
+\end{equation}
+In fact,
+\[
+\psi_n(\lambda) = \Bigl(\prod_{j=2}^{n+1}\delta_j\Bigr)\varphi_n(\lambda),
+\]
+so $\psi_n$ is the monic version of $\varphi_n$. Consequently, the eigenvalues of $T_n$ are the roots of both $\psi_n(\lambda)$ and $\varphi_n(\lambda)$.
+
+\subsection{Lanczos Algorithm}
+ 
+The \emph{Lanczos algorithm} is the special version of the \emph{Arnoldi algorithm} applied to symmetric matrices, which is used to compute a orthonormal basis of the Krylov subspace $\mathcal{K}_n(A, v) = \operatorname{span}\{v, Av, A^2v, \ldots, A^{n-1}v\}$. 
+
+\begin{algorithm}[H]
+    \caption{Arnoldi Algorithm}
+    \label{alg:arnoldi}
+    \begin{algorithmic}[1]
+        \Statex \textbf{Input:}  Matrix $A\in\mathbb{R}^{m\times m}$, vector $v\in\mathbb{R}^m$, integer $n$.
+        \Statex \textbf{Output:} Orthonormal basis $\{q_1, q_2, \ldots, q_n\}$ of $\mathcal{K}_n(A, v)$ and upper Hessenberg matrix $H_n$.
+        \State Normalize $q_1 = \frac{v}{\|v\|}$.
+    \end{algorithmic}
+\end{algorithm}
+
+\section{Multiplication Matrix}
+The \emph{multiplication matrix} for Chebyshev polynomials is defined by
+\begin{equation}
+M_x =
+\begin{bmatrix}
+0 & \tfrac12 &        &        &        &       \\
+1 & 0 & \tfrac12 &        &        &       \\
+  & \tfrac12 & 0 & \tfrac12 &        &       \\
+  &        & \ddots & \ddots & \ddots &       \\
+  &        &        & \tfrac12 & 0 & \tfrac12 \\
+  &        &        &        & \tfrac12 & 0
+\end{bmatrix},
+\end{equation}
+which is \textbf{not} symmetric and thus not a Jacobi matrix. However, $M_x$ and the Jacobi matrix share eigen-structure: the eigenvalues of $M_x$ are the first-kind Chebyshev points,
+\[
+x_k = \cos\bigl(\tfrac{(2k-1)\pi}{2n}\bigr),\quad k=1,2,\dots,n,
+\]
+and the eigen-decomposition is
+\[
+M_x V = V X,
+\]
+with
+\[
+X = \operatorname{diag}(x_1, x_2, \dots, x_n),
+\]
+\[
+V =
+\begin{bmatrix}
+1      &        &        &        \\
+       & 2      &        &        \\
+       &        & 2      &        \\
+       &        &        & \ddots\\
+       &        &        &        & 2
+\end{bmatrix}
+\begin{bmatrix}
+T_0(x_1) & T_0(x_2) & \cdots & T_0(x_n) \\
+T_1(x_1) & T_1(x_2) & \cdots & T_1(x_n) \\
+\vdots   & \vdots   & \ddots & \vdots   \\
+T_{n-1}(x_1) & T_{n-1}(x_2) & \cdots & T_{n-1}(x_n)
+\end{bmatrix}.
+\]
+One verifies that if $f_1(x)=T_0(x)=1$, then the relations
+\[
+\begin{aligned}
+ f_2(x_j)&=2x_jf_1(x_j),\\
+ f_3(x_j)&=2x_jf_2(x_j)-2f_1(x_j),\\
+ f_{k+1}(x_j)&=2x_jf_k(x_j)-f_{k-1}(x_j),\quad k=3,\dots,n-1,
+\end{aligned}
+\]
+yield $f_{k+1}(x)=2T_k(x)=2\cos(k\arccos(x))$ for $k\ge1$, matching the Chebyshev definition.
+
+Thus the matrix–vector product $b=Vc$ has entries
+\[
+b_k=(2-\delta_{1k})\sum_{j=1}^n c_j\cos\bigl(k\tfrac{(2j-1)\pi}{2n}\bigr),\quad \delta_{1k}=\begin{cases}1,&k=1,\\0,&k\neq1,\end{cases}
+\]
+which is a DCT-II computation and can be performed in $\mathcal{O}(n\log n)$ time.
+
+\end{document}
